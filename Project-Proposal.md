@@ -26,115 +26,112 @@ If the cat and mouse are on the same position, then the cat wins and the user lo
 
 MVP Goals
 
-As a player, I want my game to recognize that all 9 squares have been touched so the player can know they won.
-As a player, I want my game to recognize when the cat and mouse are on the same position so the player can know they lost.
-As a player, I would like to see the tally of how many wins or losses I have.
-As a player, I would like to reset the board after I have won or lost. 
-As a player, I would like to know when I click a position on the board, the mouse is on shown on that position
+- As a player, I want my game to recognize that all 9 squares have been touched so the player can know they won.
+- As a player, I want my game to recognize when the cat and mouse are on the same position so the player can know they lost.
+- As a player, I would like to see the tally of how many wins or losses I have.
+- As a player, I would like to reset the board after I have won or lost. 
+- As a player, I would like to know when I click a position on the board, the mouse is on shown on that position
 
 Stretch Goals
 
-As a player, I would like to see a picture of cat or mouse displayed on the page.
-As a player, I would like to level up each time I win. Each level will include a bigger board and add another cat.
-As a player, I would like to hear victory noise if I win or a loser noise if I lose.
-As a player, I would like to add a multiplayer feature which one player can choose if they would like to be the cat or the mouse.
+- As a player, I would like to see a picture of cat or mouse displayed on the page.
+- As a player, I would like to level up each time I win. Each level will include a bigger board and add another cat.
+- As a player, I would like to hear victory noise if I win or a loser noise if I lose.
+- As a player, I would like to add a multiplayer feature which one player can choose if they would like to be the cat or the mouse.
 
 ## Pseudocode:
 
 
 Variables:
 
-Establish board with mouse and cat in their starting position 
-Establish mouseTracker as empty array
-Establish winner as empty.
-Establish loser as empty
-Establish Mouse as ‘mouse’
-Establish Cat as ‘cat’
+- Establish board with mouse and cat in their starting position 
+- Establish mouseTracker as empty array
+- Establish winner as empty.
+- Establish loser as empty
+- Establish Mouse as ‘mouse’
+- Establish Cat as ‘cat’
 
 
 Cached elements:
 
-Set squareEl equal to html square class.
-Set messageEl equal to html  id.
-Set resetBtn equal to html  id.
-Set mouseTally equal to html id
-Set catTally equal to html id
+- Set squareEl equal to html square class.
+- Set messageEl equal to html  id.
+- Set resetBtn equal to html  id.
+- Set mouseTally equal to html id
+- Set catTally equal to html id
 
 Functions:
 
-Create init function which loads the game:
-	Set board equal to an array with 9 empty strings.
-	Set winner equal to false.
-	Set loser equal to false
-	render
+- Create init function which loads the game:
+    - Set board equal to an array with 9 empty strings.
+    - Set winner equal to false.
+    - Set loser equal to false
+    - render
 
-Create updateBoard function which updates the board:
-For each (box, index) 
-	Establish square equal to squareEl [index]
-If box is equal to ‘cat’ then square’s innertext is equal to ‘cat’
-Else if box is equal to ‘mouse’ then square’s innertext is equal to ‘mouse’
-Else square’s innertext is equal to an empty string
+- Create updateBoard function which updates the board:
+    - For each (box, index) 
+	    - Establish square equal to squareEl [index]
+        - If box is equal to ‘cat’ then square’s innertext is equal to ‘cat’
+        - Else if box is equal to ‘mouse’ then square’s innertext is equal to ‘mouse’
+        - Else square’s innertext is equal to an empty string
 
-Create updateMessage function which updates the message when game is over:
-	If winner is false and loser is false then display message ‘Pick a square’
-	If winner is false and loser is true then display message ‘You Lose’
-	If winner is true and loser is false then display message ‘You Win’
+- Create updateMessage function which updates the message when game is over:
+    - If winner is false and loser is false then display message ‘Pick a square’
+    - If winner is false and loser is true then display message ‘You Lose’
+    - If winner is true and loser is false then display message ‘You Win’
 
-Create updateTally function which updates the tally when game is complete:
-	If winner is false and loser is true then add 1 to the cat tally
-	If winner is true and loser is true then add 1 to the mouse tally
+- Create updateTally function which updates the tally when game is complete:
+    - If winner is false and loser is true then add 1 to the cat tally
+    - If winner is true and loser is true then add 1 to the mouse tally
 
-Establish render function calling the following functions:
-	updateBoard
-	updateMessage
-	updateTally
+- Establish render function calling the following functions:
+    - updateBoard
+    - updateMessage
+    - updateTally
 
-Create a mousePlacePiece function which allows user to position their move 
-	mousePosition = square[index]
-	Call updateMouseTracker
+- Create a mousePlacePiece function which allows user to position their move 
+    - mousePosition = square[index]
+    - Call updateMouseTracker
 
-Create a catPlacePiece function which a computer generates a move for the cat
-	catPosition = math random a number which will output an position on the board
+- Create a catPlacePiece function which a computer generates a move for the cat
+    - catPosition = math random a number which will output an position on the board
 
-Establish a winningCombination constant which holds the key to the winning board.
-	[0,1,2,3,4,5,6,7,8]
+- Establish a winningCombination constant which holds the key to the winning board.
+    - [0,1,2,3,4,5,6,7,8]
 
-Create updateMouseTracker function which updates the mouseTracker
-If loser equals false & winner equals false
-Add the clicked square index to the mouseTracker array
+- Create updateMouseTracker function which updates the mouseTracker
+    - If loser equals false & winner equals false
+    - Add the clicked square index to the mouseTracker array
 
+- Create checkForWinner function which checks for winner.
+    - if winningCombination is equal to mouseTracker 
+    - Winner equals true
+    - Add one to mouse tally
+    - Else if cat’s index is equal to mouse index, loser is equal to true.
+    - Add one to cat tracker.
+    - Else return
 
-
-Create checkForWinner function which checks for winner.
- 	if winningCombination is equal to mouseTracker 
-	Winner equals true
-	Add one to mouse tally
-	Else if cat’s index is equal to mouse index, loser is equal to true.
-	Add one to cat tracker.
-	Else return
-
-
-Create a handle click function which includes the following functions:
-	mousePlacepiece
-	catPlacePiece
-	updateMouseTracker
-	checkForWinner
-	checkForLoser
-	render
+- Create a handle click function which includes the following functions:
+    - mousePlacepiece
+    - catPlacePiece
+    - updateMouseTracker
+    - checkForWinner
+    - checkForLoser
+    - render
 
 				
 
 Event Listeners:
 
-Access square element from HTML and for each square clicked, add event listener to the square element. 
+- Access square element from HTML and for each square clicked, add event listener to the square element. 
 
-Access reset element from html and click event passing through the init function
+- Access reset element from html and click event passing through the init function
 
 ## Timeline: 
 
 | Day        |   | Task                               | Blockers | Notes/ Thoughts |
 |------------|---|------------------------------------|----------|-----------------|
-| Monday     |   | Create and present proposa         |          |                 |
+| Monday     |   | Create and present proposal         |          |                 |
 | Tuesday    |   | Create html, js, css files         |          |                 |
 | Wednesday  |   | Create basic scaffolding           |          |                 |
 | Thursday   |   | Add functionality                  |          |                 |
